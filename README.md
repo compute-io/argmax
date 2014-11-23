@@ -19,18 +19,33 @@ For use in the browser, use [browserify](https://github.com/substack/node-browse
 To use the module,
 
 ``` javascript
-var foo = require( 'compute-argmax' );
+var argmax = require( 'compute-argmax' );
 ```
 
-#### foo( arr )
+#### argmax( arr )
 
-What does this function do?
+Computes the maximum value of a numeric `array` and returns the corresponding `array` indices.
+
+``` javascript
+var data = [ 3, 2, 5, 2, 5 ];
+
+var idx = argmax( data );
+// returns [2,4]
+```
 
 
 ## Examples
 
 ``` javascript
-var foo = require( 'compute-argmax' );
+var argmax = require( 'compute-argmax' );
+
+// Simulate some data...
+var data = new Array( 100 );
+for ( var i = 0; i < data.length; i++ ) {
+	data[ i ] = Math.round( Math.random()*100 );
+}
+var idx = argmax( data );
+console.log( idx );
 ```
 
 To run the example code from the top-level application directory,
