@@ -2,7 +2,7 @@ argmax
 ===
 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] [![Dependencies][dependencies-image]][dependencies-url]
 
-> Computes the maximum value of a numeric array and returns the corresponding array indices.
+> Returns the array indices corresponding to the maximum value of an input array.
 
 
 ## Installation
@@ -16,15 +16,13 @@ For use in the browser, use [browserify](https://github.com/substack/node-browse
 
 ## Usage
 
-To use the module,
-
 ``` javascript
 var argmax = require( 'compute-argmax' );
 ```
 
-#### argmax( arr )
+#### argmax( arr[, accessor] )
 
-Computes the maximum value of a numeric `array` and returns the corresponding `array` indices.
+Returns the `array` indices corresponding to the maximum value of an input `array`.
 
 ``` javascript
 var data = [ 3, 2, 5, 2, 5 ];
@@ -33,13 +31,35 @@ var idx = argmax( data );
 // returns [2,4]
 ```
 
+For non-numeric `arrays`, provide an accessor `function` for accessing `numeric` values.
+
+``` javascript
+var arr = [
+	{'x':3},
+	{'x':2},
+	{'x':5},
+	{'x':2},
+	{'x':5}
+];
+
+function getValue( d ) {
+	return d.x;
+}
+
+var idx = argmax( arr, getValue );
+// returns [2,4]
+```
+
+
+__Note__: if provided an empty `array`, the function returns `null`.
+
+
 
 ## Examples
 
 ``` javascript
 var argmax = require( 'compute-argmax' );
 
-// Simulate some data...
 var data = new Array( 100 );
 for ( var i = 0; i < data.length; i++ ) {
 	data[ i ] = Math.round( Math.random()*100 );
@@ -59,7 +79,7 @@ $ node ./examples/index.js
 
 ### Unit
 
-Unit tests use the [Mocha](http://visionmedia.github.io/mocha) test framework with [Chai](http://chaijs.com) assertions. To run the tests, execute the following command in the top-level application directory:
+Unit tests use the [Mocha](http://mochajs.org) test framework with [Chai](http://chaijs.com) assertions. To run the tests, execute the following command in the top-level application directory:
 
 ``` bash
 $ make test
@@ -83,15 +103,15 @@ $ make view-cov
 ```
 
 
+---
 ## License
 
 [MIT license](http://opensource.org/licenses/MIT). 
 
 
----
 ## Copyright
 
-Copyright &copy; 2014. Athan Reines.
+Copyright &copy; 2014-2015. The Compute.io Authors.
 
 
 [npm-image]: http://img.shields.io/npm/v/compute-argmax.svg
